@@ -3,8 +3,26 @@
 #include <conio.h>
 #include <ctime>
 #include <stdlib.h>
-
 using namespace std ;
+
+
+// Color codes
+const int BLACK = 0;
+const int BLUE = 1;
+const int GREEN = 2;
+const int CYAN = 3;
+const int RED = 4;
+const int MAGENTA = 5;
+const int YELLOW = 6;
+const int WHITE = 7;
+
+
+
+
+
+
+
+
 
 char board[10][10] ;
 bool ships[5] = {true , true , true , true , true} ;
@@ -16,6 +34,13 @@ int user_choice_for_ship ; // making it global so i can use it revert the not ch
 void clearScreen()
 {
 	system("CLS") ;
+}
+
+void re_init_ships(){
+  for(int st = 0  ;  st  <= 5  -  1   ; st += 1)
+  {
+  	ships[st] = true ; 
+  }
 }
 
 
@@ -485,7 +510,7 @@ int chose_ship(bool ships_left[])
 
 
 
-int main()
+void Place_ships() // Game Start
 {
 	// Menu 1st Option will call this function  
 	
@@ -515,7 +540,156 @@ int main()
 		clearScreen() ;
 	    display_board(board) ;
 	}
-	return 0 ;
+}
+
+
+bool Player_1[10][10] ;
+
+void Player1_board_Init()
+{
+	// Intializing the player boolean array to according to the board specified by the user if the it is ship make it true else
+	// false and this board will act as hidden board for the player 1
+	for(int st =  0  ; st <= 10 - 1  ; st += 1)  
+	{
+		for(int st2  =  0 ;  st2 <= 10 -  1 ;  st2 += 1)
+		{
+			if(board[st][st2] == '~')
+			{
+				Player_1[st][st2] = false ; 
+			}
+			else
+			{
+				Player_1[st][st2] = true ;
+			}
+		}
+	}
+	
+}
+
+bool Player_2[10][10] ;
+
+void Player2_board_Init()
+{
+	// Intializing the player boolean array to according to the board specified by the user if the it is ship make it true else
+	// false and this board will act as hidden board for the player 1
+	for(int st =  0  ; st <= 10 - 1  ; st += 1)  
+	{
+		for(int st2  =  0 ;  st2 <= 10 -  1 ;  st2 += 1)
+		{
+			if(board[st][st2] == '~')
+			{
+				Player_2[st][st2] = false ; 
+			}
+			else
+			{
+				Player_2[st][st2] = true ;
+			}
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+void Show_Player_1(string player)
+{
+	setColor(RED ,  BLACK) ;
+	cout << "\nFirst Turn to Place the Ships is " << player << endl ;
+	setColor(WHITE ,  BLACK) ;
+}
+
+void Show_Player_2(string player)
+{
+	setColor(YELLOW ,  BLACK) ;
+	cout << "\nFirst Turn to Place the Ships is " << player << endl ;
+	setColor(WHITE ,  BLACK) ;
+}
+
+
+
+
+
+void  vsPlayer_Ships_Placement()
+{
+	// Determinig the First Player to Place his Boats
+	setColor(MAGENTA , BLACK) ;
+	cout << "1.Head\n2.Tails?\n" ;
+	setColor(WHITE , BLACK) ;
+	cout << "Choice : " ;
+	int op ; 
+	cin >> op ;
+	while(op < 1 || op > 2)
+	{
+		cout << "Enter Correct Choice\n" ;
+		cin >> op ; 
+	}
+	srand(time(0)) ;
+	int winner_choice = (rand()  % (2 - 1 + 1)) + 1 ;
+	if(op == winner_choice)
+	{
+		setColor(RED , BLACK) ;
+		cout << "\nYou won the Toss Player 1 Turn\n" ;
+		setColor(WHITE , BLACK) ;		
+		Show_Player_1("Will Give this name later") ;
+		re_init_ships() ; // have to initalize the avaialable ships using this function ah
+		Place_ships() ;
+	    Player1_board_Init() ;
+	    initializeBoard(board); // Initialize it back to ~ so Player 2  can now Chose his turn
+	    
+	    
+	     clearScreen() ;
+	    
+	    Show_Player_2("Give this name also") ;
+	    //have to initalize the avaialable ships using this function ah 
+	    // All ships are now avaialable for Player 2 aswell now since it was not calling the next functions cause no ships were available
+	    re_init_ships() ;	 
+	    Place_ships() ;
+	    Player2_board_Init() ;
+	    initializeBoard(board) ; // Change it back also too now 
+	}
+	else
+	{
+		setColor(RED , BLACK) ;
+		cout << "\nYou Lost the Toss Player 2 Turn\n" ;
+		setColor(WHITE , BLACK) ;
+		
+		Show_Player_2("Give this name also") ;
+        re_init_ships() ; // have to initalize the avaialable ships using this function ah
+	    Place_ships() ;
+	    Player2_board_Init() ;
+	    initializeBoard(board) ; // Change it back also too now 
+	    
+	    clearScreen() ;
+	    
+	    Show_Player_1("Will Give this name later") ;
+		re_init_ships() ; // have to initalize the avaialable ships using this function ah
+        Place_ships() ;
+	    Player1_board_Init() ;
+	    initializeBoard(board); // Initialize it back to ~ so Player 2  can now Chose his turn   
+	}
+}
+
+void vsPlayer(char board1[10][10]  , char board2[10][10]) // This functions will execute the full player vs player attack
+{
+     vsPlayer_Ships_Placement() ;	
+	 
+	 // Now have to work on this function defination
+}
+
+
+signed main()
+{
+	char a[10][10] ;
+	vsPlayer(a , a) ;
+	return 0  ;
 }
 
 
