@@ -1,4 +1,6 @@
 # 2D Warship Battle
+<img src = "/Images/image.png" alt = "Image_1">
+
 
 This is a 2D Warship Game to be played on terminal . I'll simply cut to the chase  =)
 
