@@ -4,6 +4,19 @@
 
 This is a 2D Warship Game to be played on terminal . I'll simply cut to the chase  =)
 
+1.It has two modes :
+   Player vs Player  and Player vs Computer 
+2.Take turn to place the ship on board 
+3.Enter Shots to attack the opponent Board
+4.Enjoy the game.
+
+<img src = "/Images/image2.png" alt = "Image_2">
+
+
+
+
+
+
 Game Programmers:
 * Bushra Chaudhry
 * Muhammad Saad Bin Waqas
