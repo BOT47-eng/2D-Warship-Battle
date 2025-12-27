@@ -18,7 +18,7 @@ How to Install ?
 1. Clone the Git Repository
 
 ```
-
+    https://github.com/BOT47-eng/Battle_Ship_Game.git 
 ```
 2. Open the file on your  editor (Dev C++ or Vscode).
 3. Press Compile and Run the code.
